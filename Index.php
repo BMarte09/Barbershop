@@ -16,7 +16,7 @@ $p = isset($_GET['p']) ? $_GET['p'] : 'login';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex´s Barbershop</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous"> <script src="https://kit.fontawesome.com/4ec4f15ca5.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="resources/css/style.css"/>
+	<link rel="stylesheet" href="./resources/css/style.css"/>
     <link rel="stylesheet" href="resources/css/StyleAdmin.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
@@ -31,6 +31,7 @@ $p = isset($_GET['p']) ? $_GET['p'] : 'login';
             <span class="navbar-name">Alex´s Barbershop</span>
         </div>
         <ul class="navbar-menu">
+            <?php if(isset(($_SESSION['id_cliente']))){ ?>
             <li class="navbar-item">
                 <a href="?p=login" class="navbar-link"><i class="fas fa-home"></i> INICIO</a>
             </li>
@@ -38,8 +39,9 @@ $p = isset($_GET['p']) ? $_GET['p'] : 'login';
                 <a href="#" onclick="openModal('notificationModal')" class="navbar-link"><i class="fas fa-bell"></i> NOTICACIONES</a>
             </li>
             <li class="navbar-item">
-                <a href="#" class="navbar-link"><i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN</a>
+                <a href="?p=logout" class="navbar-link"><i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN</a>
             </li>
+            <?php } ?>
         </ul>
     </nav>
 

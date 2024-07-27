@@ -21,7 +21,11 @@ if (isset($_POST['agendar'])) {
 
 
 
-if (isset($_GET['cancelar'])) {
+if (isset($_GET['status'])) {
+
+    $status = clear($_GET['status']);
+    $result= $barber->updateBarberStatus($status);
+
 }
 
 
@@ -130,16 +134,19 @@ if (isset($_GET['cancelar'])) {
                 </tr>
             </thead>
             <tbody id="table-body">
+          
+        
+        <tr data-date="<?= $rp['Fecha_cita'] ?>" class="<?= $rowClass ?>">
 
-
-                <?php foreach ($allBarbers as $rp) : ?>
-                    <tr>
+                <?php foreach ($allBarbers as $rp) : 
+                    $rowClass = ($rp['Estado'] == 'Inactivo') ? 'disabled-row' : ''; ?>
+                    <tr   class="<?= $rowClass ?>">
                         <td><?= $rp['Nombre'] ?> <?= $rp['Apellido'] ?></td>
                         <td><?= $rp['Correo'] ?></td>
                         <td><?= $rp['Celular'] ?></td>
                         <td><?= $rp['Estado'] ?></td>
                         <td>
-                            <a href="?p=barberos&edit=<?= $rp['idBarbero'] ?>"><i class="fa-solid fa-edit agenda-icon"></i></a>
+                            <a href="?p=barberos&status=<?= $rp['idBarbero'] ?>"><i class="fa-solid fa-edit agenda-icon"></i></a>
                             &nbsp;
                             <a href="?p=barberos&delete=<?= $rp['idBarbero'] ?>"><i class="fa fa-trash agenda-icon"></i></a>
                         </td>

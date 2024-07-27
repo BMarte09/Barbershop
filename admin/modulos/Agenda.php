@@ -165,16 +165,7 @@ if ($dateFilter) {
             text-align: center;
             padding-top: 2rem;
         }
-        .disabled-row {
-          
-        color: #a9a9a9; /* Color de texto gris */
-        text-decoration: line-through; /* Texto tachado */
-        pointer-events: none; /* Deshabilita los eventos del mouse */
-    }
-    .disabled-row i{
-        pointer-events: none; 
-        color: #a9a9a9;
-    }
+       
     </style>
 </head>
 

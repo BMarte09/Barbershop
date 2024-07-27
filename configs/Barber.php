@@ -28,29 +28,63 @@ class Barber {
 
         return $barbers;
     }
-
-    public function changeUserStatus($barberId) {
-        // Limpiar el ID de la cita
+    public function updateBarberStatus($barberId) {
+        // Limpiar el ID del barbero
         $barberId = clear($barberId);
-
-        // Consulta para actualizar el estado de la cita
+    
+        // Consulta para obtener el estado actual del barbero
         $query = "
-            UPDATE barberos
-            SET Estado = 'Activo'
+            SELECT Estado
+            FROM barberos
             WHERE idBarbero = '$barberId'
         ";
-
-        // Ejecutar la consulta
-        if (!$this->db->query($query)) {
-            // Manejo de errores
-            echo "Error al cancelar la cita: " . $this->db->error;
-            return;
+        $result = $this->db->query($query);
+    
+        if (!$result) {
+            // Manejo de errores al obtener el estado actual
+            echo "Error al obtener el estado actual del barbero: " . $this->db->error;
+            return false;
+        }
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $estado_actual = $row['Estado'];
+            $nuevo_estado = null;
+    
+            // Determinar el nuevo estado basado en el estado actual
+            if ($estado_actual == 'Inactivo') {
+                $nuevo_estado = 'Activo';
+            } elseif ($estado_actual == 'Activo') {
+                $nuevo_estado = 'Inactivo';
+            }
+    
+            // Actualizar el estado del barbero si se ha determinado un nuevo estado
+            if ($nuevo_estado !== null) {
+                $update_query = "
+                    UPDATE barberos
+                    SET Estado = '$nuevo_estado'
+                    WHERE idBarbero = '$barberId'
+                ";
+                if (!$this->db->query($update_query)) {
+                    // Manejo de errores al actualizar el estado
+                    echo "Error al actualizar el estado del barbero: " . $this->db->error;
+                    return false;
+                } else {
+                    // Alerta de éxito
+                    alert("El estado del barbero fue actualizado a $nuevo_estado con éxito!", 1, 'Barberos', 0);
+                    return true;
+                }
+            } else {
+                // Manejo de error si no se pudo determinar el nuevo estado
+                echo "Error al determinar el nuevo estado del barbero.";
+                return false;
+            }
+        } else {
+            // Manejo de error si no se encontró el barbero con el ID proporcionado
+            echo "No se encontró el barbero con el ID proporcionado.";
+            return false;
         }
 
-        // Alerta de éxito
-        alert("El usuario del barbero fue actualizada!", 1, 'Agenda', 0);
-        return;
-    }
-
+}
 }
 ?>
