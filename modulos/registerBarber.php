@@ -20,7 +20,7 @@ if (isset($_POST['enviar'])) {
     $nombre = clear($_POST['name']);
     $apellido = clear($_POST['lastname']);
     $celular = clear($_POST['phonenumber']);
-    $rol = '3';
+    $rol = '2';
 
     $_SESSION['form_data'] = [
         'username' => $username,
@@ -62,7 +62,7 @@ if (isset($_POST['enviar'])) {
             <form class="Register-form" action="" method="POST">
         
         
-                <h2 class="register_title">Crea tu cuenta como cliente</h2>
+                <h2 class="register_title">Crea tu cuenta como Barbero</h2>
 
                 <div class=inputx>
                     

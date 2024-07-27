@@ -11,13 +11,14 @@ class User {
     }
         //REGISTRAR USUARIO
 
-    public function registrar_usuario($email, $password, $cpassword, $name, $lastname, $phonenumber) {
+    public function registrar_usuario($email, $password, $cpassword, $name, $lastname, $phonenumber,$rol) {
         $email = clear($email);
         $password = clear($password);
         $cpassword = clear($cpassword);
         $name = clear($name);
         $lastname = clear($lastname);
         $phonenumber = clear($phonenumber);
+        
        // $adress = clear($adress);
 
         // Verificar si el correo ya está en uso
@@ -34,6 +35,7 @@ class User {
             return;
         }
 
+        if($rol==3){
         // Insertar en la tabla Usuarios
         $query = "INSERT INTO Usuarios (Correo, Contraseña, Rol) VALUES ('$email', '$password', 3)";
         if (!$this->db->query($query)) {
@@ -46,15 +48,24 @@ class User {
         $row = $result->fetch_assoc();
         $idUsuarioNuevo = $row['Id'];
 
-        // Insertar en la tabla Clientes
-        $query = "INSERT INTO Clientes (Nombre, Apellido, Celular, Correo, idUsuario) VALUES ('$name', '$lastname', '$phonenumber', '$email', '$idUsuarioNuevo')";
+        $this->registerCostumer($email,$name, $lastname, $phonenumber,$idUsuarioNuevo);
+        return;
+
+    }else if($rol==2){
+        $query = "INSERT INTO Usuarios (Correo, Contraseña, Rol) VALUES ('$email', '$password', 2)";
         if (!$this->db->query($query)) {
-            die("Error al insertar en la tabla clientes " . $this->db->error);
-            return;
+            die("Error al insertar el usuario: " . $this->db->error);
         }
 
-        alert("Te has registrado satisfactoriamente.",1,'login',0);
+        // Obtener el id del usuario recién creado
+        $query = "SELECT Id FROM Usuarios WHERE Correo = '$email'";
+        $result = $this->db->query($query);
+        $row = $result->fetch_assoc();
+        $idUsuarioNuevo = $row['Id'];
+        $this->registerBarber($name,$lastname,$phonenumber,$email, $idUsuarioNuevo);
         return;
+
+    }      
     }
 
 
@@ -74,6 +85,11 @@ class User {
             return;
         }
 
+        // Verificar si el usuario es Barbero
+        if($this->isBarber($email,$password)){
+            alert("Inicio de sesión exitoso como Barbero", 1,'Dashboard','2');
+            return;
+        }
         if($this->validateCustomer($email,$password)){
         
             alert("Te has registrado satisfactoriamente.", 1, 'Dashboard','2');
@@ -109,6 +125,16 @@ class User {
     }
 
 
+    function isBarber($email, $password) {
+        $query = $this->db->query("SELECT * FROM Usuarios WHERE Correo = '$email' AND Contraseña = '$password'  AND Rol = '2'");
+        if ($query->num_rows > 0) {
+           
+                return true;
+            } else {
+               
+                return false;
+            }
+ }
 
 
     function isAdmin($email, $password) {
@@ -147,6 +173,32 @@ public function getClienteId($userId) {
         return null;
     }
 }
+
+public function registerCostumer($name, $lastname, $phonenumber, $email,$idUsuarioNuevo){
+// Insertar en la tabla Clientes
+$query = "INSERT INTO Clientes (Nombre, Apellido, Celular, Correo, idUsuario) VALUES ('$name', '$lastname', '$phonenumber', '$email', '$idUsuarioNuevo')";
+if (!$this->db->query($query)) {
+    die("Error al insertar en la tabla clientes " . $this->db->error);
+    return;
+}
+
+alert("Te has registrado satisfactoriamente.",1,'login',0);
+return;
+
+}
+
+public function registerBarber($name, $lastname, $phonenumber, $email,$idUsuarioNuevo){
+    // Insertar en la tabla Clientes
+    $query = "INSERT INTO narberos (Nombre, Apellido, Celular, Correo, idUsuario, Estado) VALUES ('$name', '$lastname', '$phonenumber', '$email', '$idUsuarioNuevo','Pendiente')";
+    if (!$this->db->query($query)) {
+        die("Error al insertar en la tabla barberos " . $this->db->error);
+        return;
+    }
+    
+    alert("Te has registrado satisfactoriamente.",1,'login',0);
+    return;
+    
+    }
     
 }
 
