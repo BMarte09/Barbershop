@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `barberiabd`
 --
+USE barberiabd;
 
 DELIMITER $$
 --
@@ -69,7 +70,7 @@ CREATE TABLE `barberos` (
   `idUsuario` int DEFAULT NULL,
   `Estado` varchar(20) DEFAULT 'Inactivo',
   `Correo` varchar(50) DEFAULT 'example@example.com'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `barberos`
@@ -94,7 +95,7 @@ CREATE TABLE `citas` (
   `Hora_cita` time NOT NULL,
   `idservicio` int NOT NULL,
   `Estado_cita` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `citas`
@@ -220,7 +221,7 @@ CREATE TABLE `clientes` (
   `Correo` varchar(45) DEFAULT NULL,
   `Dirección` text,
   `idUsuario` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
@@ -246,7 +247,7 @@ CREATE TABLE `horarios` (
   `Hora_Inicio` time NOT NULL,
   `Hora_Fin` time NOT NULL,
   `Estado` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -257,7 +258,7 @@ CREATE TABLE `horarios` (
 CREATE TABLE `rol` (
   `IDRol` int NOT NULL,
   `Rol` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -278,7 +279,7 @@ CREATE TABLE `servicios` (
   `idServicio` int NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Tarifa` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicios`
@@ -301,7 +302,7 @@ CREATE TABLE `usuarios` (
   `Correo` varchar(45) NOT NULL,
   `Contraseña` varchar(20) NOT NULL,
   `Rol` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
