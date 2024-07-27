@@ -65,7 +65,7 @@ $pendingAppointments = $cita->getPendingAppointments($id_cliente);
             <span>RESERVAR CITAS</span>
         </a>
 
-        <a href="#" class="dashboard-card" onclick="openModal('notificationModal')">
+        <a href="?p=Tus_citas" class="dashboard-card">
             <img src="resources/images/agenda.png" class="img-card" alt="Imagen">
             <span>CITAS AGENDADAS</span>
         </a>

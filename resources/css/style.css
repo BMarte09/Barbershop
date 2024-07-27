@@ -808,3 +808,98 @@ color: #212529;
   pointer-events: none; 
   color: #a9a9a9;
 }
+.Main-container{
+               
+    width: 55%;
+    height: 20%;
+    display: flex;
+    gap: 36px;
+  
+}
+.Tus_citas-container{
+
+    max-width: 100vh;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0.5, 15);
+    border-radius: 10px;
+    flex-grow: 1;
+    
+    
+}
+#Calendar-Cont{
+  background-color: #D33333;  
+    
+        
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #F1F1F1;
+    flex-grow: 1;
+    text-align: right;
+    padding-inline: 25px;
+    text-align: center;
+   padding-top: 10px;
+   box-shadow: 
+   5px 10px 10px rgba(134, 128, 128), 
+   3px 6px 10px rgb(134, 128, 128); 
+ border-radius: 10px;
+ font-weight: bold;
+ font-size: 150%;
+    
+}
+
+#Citas-Items{
+  flex-grow: 1;  
+              
+}
+.Btn-container {
+  display: flex;                
+  gap: 10px;  
+  margin-top: 30px; 
+                   
+}
+
+.Button-Citas {
+  padding: 10px 20px;           
+  border: none;                 
+  border-radius: 25px;                      
+  font-size: 16px;                         
+  display: flex;                
+  justify-content: center; 
+  margin: 0;
+  margin-top: 1.5rem;
+  background: #D33333;
+  color: #fefefe;
+   font-weight: bold;
+}
+.Button-Citas2 {
+  padding: 10px 20px;                      
+  border-radius: 25px;                      
+  font-size: 16px;                         
+  display: flex;                
+  justify-content: center; 
+  margin: 0;
+  margin-top: 1.5rem;
+  background: #ebdede59;
+  color: #000000;
+  border: solid 1px;
+  font-weight: bold;
+   
+}
+
+.Title-Section{
+  padding-top: 8%;
+  padding-bottom:  -20%;
+  display: flex;                
+  justify-content: center; 
+  font-size: 250%;
+  color: D33333;
+}
+
+
